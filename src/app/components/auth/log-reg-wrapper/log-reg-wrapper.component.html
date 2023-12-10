@@ -1,0 +1,10 @@
+<div class="w-full h-screen flex justify-center items-center">
+    <div [ngClass]="!this.authService.isSignUp ? this.simpleWrapper: this.activeWrapper">
+        <span [ngClass]="!this.authService.isSignUp ? this.simpleLoginBgAnimate: this.activeLoginBgAnimate"></span> 
+        <span [ngClass]="!this.authService.isSignUp ? this.simpleRegisterBgAnimate: this.activeRegisterBgAnimate"></span> 
+        
+        <app-login></app-login>
+        
+        <app-register></app-register>
+    </div>
+</div>

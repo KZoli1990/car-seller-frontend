@@ -1,0 +1,221 @@
+<div class="w-full">
+    
+    <div *ngIf="this.authService.isLoggedIn()" class="flex justify-between items-center second-break:relative second-break:top-[-80px] third-break:px-[4%] fourth-break:px-[11%]">
+        <p class="text-white text-center ms-1">Üdvözlöm <br class="hidden second-break:block third-break:hidden"> kedves <span class="text-[#0ef]">{{this.authService.actualUser.firstName}}</span> !</p>
+        <img class="h-20 w-20 object-cover rounded-full" [src]=" this.authService.actualUser.avatar" alt="avtar">
+    </div>
+    <h1 *ngIf="this.authService.isLoggedIn()" class="my-4 text-center text-[#0ef] text-xl second-break:text-3xl second-break:relative second-break:top-[-80px] font-light tracking-wider">Üdvözlöm az autókereskedő oldalán!</h1>
+    <h1 *ngIf="!this.authService.isLoggedIn()" class="my-4 text-center text-[#0ef] text-xl second-break:text-3xl second-break:relative font-light tracking-wider">Üdvözlöm az autókereskedő oldalán!</h1>
+    <h2 class="bg-[linear-gradient(45deg,_#081b29,_#0ef)] text-center text-[#081b29]">{{this.carService.allCars.length}} db használtautó várja új gazdáját.</h2>
+    <div class="second-break:grid second-break:grid-cols-2 fourth-break:grid-cols-3 fifth-break:flex">
+        <!--Brand-->
+        <div class="w-[300px] p-2 h-full items-center mx-auto">
+            <div class='relative m-1 p-2 duration-500 before:absolute before:inset-[2px] before:bg-[#081b29] hover:shadow-blue-35px bg-white hover:bg-[#1cd8fd] group'>
+                <i class='absolute inset-0 block 
+                        before:absolute before:top-0 before:left-[80%] before:w-3 before:h-1 before:bg-[#081b29] before:transform before:translate-x-[-50%] before:skew-x-[325deg] group-hover:before:duration-500 group-hover:before:w-[20px] group-hover:before:left-[20%]
+                        after:absolute after:bottom-0 after:left-[20%] after:w-3 after:h-2 after:bg-[#081b29] after:transform after:translate-x-[-50%] after:skew-x-[325deg] group-hover:after:duration-500 group-hover:after:w-[20px] group-hover:after:left-[80%]'
+                > </i> 
+                <div class="relative flex flex-col">
+                    <label class="text-white absolute top-[-2px] text-[11px] left-1 group-hover:text-[#0ef]" for="">Márka</label>
+                    <select class="cursor-pointer pt-4 border-none bg-[#081b29] text-white" name="cars" id="cars" [(ngModel)]="this.carService.actualCarBrand" (change)="this.carService.brandInsert()">
+                        <option class="hidden font-thin text-[10px]" value="">mindegy</option>
+                        <option *ngFor="let c of this.carService.carList" class="p-1" [value]="c.brand">{{c.brand}}</option>  
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+
+        <!--Model-->
+        <div class="w-[300px] p-2 h-full items-center mx-auto">
+            <div class='relative m-1 p-2 duration-500 before:absolute before:inset-[2px] before:bg-[#081b29] hover:shadow-blue-35px bg-white hover:bg-[#1cd8fd] group'>
+                <i class='absolute inset-0 block 
+                        before:absolute before:top-0 before:left-[80%] before:w-3 before:h-1 before:bg-[#081b29] before:transform before:translate-x-[-50%] before:skew-x-[325deg] group-hover:before:duration-500 group-hover:before:w-[20px] group-hover:before:left-[20%]
+                        after:absolute after:bottom-0 after:left-[20%] after:w-3 after:h-2 after:bg-[#081b29] after:transform after:translate-x-[-50%] after:skew-x-[325deg] group-hover:after:duration-500 group-hover:after:w-[20px] group-hover:after:left-[80%]'
+                > </i> 
+                <div class="relative flex flex-col">
+                    <label class="text-white absolute top-[-2px] text-[11px] left-1 group-hover:text-[#0ef]" for="">Modell</label>
+                    <select class="cursor-pointer pt-4 border-none bg-[#081b29] text-white " name="cars" id="cars" [(ngModel)]="this.carService.searchCarItem.model" (change)="this.carService.searchCar()">
+                        <option class="hidden font-thin text-[10px]" value="">mindegy</option>
+                        <option *ngIf="this.carService.carListModels.length === 0" disabled class="p-1" value="not match">Nincs találat</option>
+                        <option *ngFor="let c of this.carService.carListModels" class="p-1" [value]="c">{{c}}</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+
+        <!--Design-->
+        <div class="w-[300px] p-2 h-full items-center mx-auto">
+            <div class='relative m-1 p-2 duration-500 before:absolute before:inset-[2px] before:bg-[#081b29] hover:shadow-blue-35px bg-white hover:bg-[#1cd8fd] group'>
+                <i class='absolute inset-0 block 
+                        before:absolute before:top-0 before:left-[80%] before:w-3 before:h-1 before:bg-[#081b29] before:transform before:translate-x-[-50%] before:skew-x-[325deg] group-hover:before:duration-500 group-hover:before:w-[20px] group-hover:before:left-[20%]
+                        after:absolute after:bottom-0 after:left-[20%] after:w-3 after:h-2 after:bg-[#081b29] after:transform after:translate-x-[-50%] after:skew-x-[325deg] group-hover:after:duration-500 group-hover:after:w-[20px] group-hover:after:left-[80%]'
+                > </i> 
+                <div class="relative flex flex-col">
+                    <label class="text-white absolute top-[-2px] text-[11px] left-1 group-hover:text-[#0ef]" for="">Kivitel</label>
+                    <select class="cursor-pointer pt-4 border-none bg-[#081b29] text-white " name="cars" id="cars" [(ngModel)]="this.carService.searchCarItem.design" (change)="this.carService.searchCar()">
+                        <option class="hidden font-thin text-[10px]" value="">mindegy</option>
+                        <option *ngFor="let d of this.carService.carDesigns" class="p-1" [value]="d">{{d}}</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+
+        <!--Fuel-->
+        <div class="w-[300px] p-2 h-full items-center mx-auto">
+            <div class='relative m-1 p-2 duration-500 before:absolute before:inset-[2px] before:bg-[#081b29] hover:shadow-blue-35px bg-white hover:bg-[#1cd8fd] group'>
+                <i class='absolute inset-0 block 
+                        before:absolute before:top-0 before:left-[80%] before:w-3 before:h-1 before:bg-[#081b29] before:transform before:translate-x-[-50%] before:skew-x-[325deg] group-hover:before:duration-500 group-hover:before:w-[20px] group-hover:before:left-[20%]
+                        after:absolute after:bottom-0 after:left-[20%] after:w-3 after:h-2 after:bg-[#081b29] after:transform after:translate-x-[-50%] after:skew-x-[325deg] group-hover:after:duration-500 group-hover:after:w-[20px] group-hover:after:left-[80%]'
+                > </i> 
+                <div class="relative flex flex-col">
+                    <label class="text-white absolute top-[-2px] text-[11px] left-1 group-hover:text-[#0ef]" for="">Üzemanyag</label>
+                    <select class="cursor-pointer pt-4 border-none bg-[#081b29] text-white " name="cars" id="cars" [(ngModel)]="this.carService.searchCarItem.fuel" (change)="this.carService.searchCar()">
+                        <option class="hidden font-thin text-[10px]" value="">mindegy</option>
+                        <option *ngFor="let f of this.carService.carFuel" class="p-1" [value]="f">{{f}}</option>
+                    </select>
+                </div>
+                
+            </div>
+        </div>
+
+        <!--Vintage-->
+        <div class="p-2 h-full items-center  w-[300px] mx-auto">
+            <div class='relative m-1 p-2 duration-500 before:absolute before:inset-[2px] before:bg-[#081b29] hover:shadow-blue-35px bg-white hover:bg-[#1cd8fd] group'>
+                <i class='absolute inset-0 block 
+                        before:absolute before:top-0 before:left-[80%] before:w-3 before:h-1 before:bg-[#081b29] before:transform before:translate-x-[-50%] before:skew-x-[325deg] group-hover:before:duration-500 group-hover:before:w-[20px] group-hover:before:left-[20%]
+                        after:absolute after:bottom-0 after:left-[20%] after:w-3 after:h-2 after:bg-[#081b29] after:transform after:translate-x-[-50%] after:skew-x-[325deg] group-hover:after:duration-500 group-hover:after:w-[20px] group-hover:after:left-[80%]'
+                > </i> 
+                <div class="relative flex flex-col">
+                    <label class="text-white absolute top-[-2px] text-[11px] left-1 group-hover:text-[#0ef]" for="">Évjárat</label>
+                    <label class="text-white absolute top-[-2px] text-[11px] left-20 group-hover:text-[#0ef]" for="">-tól</label>
+                    <label class="text-white absolute top-[-2px] text-[11px] left-[14.5rem] group-hover:text-[#0ef]" for="">-ig</label>
+                    <div class="flex justify-between">
+                        <select class="cursor-pointer pt-4 border-none bg-[#081b29] text-white min-w-[115px] text-end" name="cars" id="cars" [(ngModel)]="this.carService.searchFromVintage" (change)="this.carService.searchCar()">
+                            <option class="hidden font-thin text-[10px]" value="">-tól</option>
+                            <option  *ngFor="let i of this.carService.yearCounts" class="p-1" [value]="i">{{i}}</option>  
+                        </select>
+                        <select class="cursor-pointer pt-4 border-none bg-[#081b29] text-white min-w-[115px] text-end" name="cars" id="cars" [(ngModel)]="this.carService.searchToVintage" (change)="this.carService.searchCar()">
+                            <option class="hidden font-thin text-[10px]" value="">-ig</option>
+                            <option  *ngFor="let i of this.carService.yearCounts" class="p-1" [value]="i">{{i}}</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!--Price-->
+        <div class="p-2 h-full items-center  w-[300px] mx-auto">
+            <div class='relative m-1 p-2 duration-500 before:absolute before:inset-[2px] before:bg-[#081b29] hover:shadow-blue-35px bg-white hover:bg-[#1cd8fd] group'>
+                <i class='absolute inset-0 block 
+                        before:absolute before:top-0 before:left-[80%] before:w-3 before:h-1 before:bg-[#081b29] before:transform before:translate-x-[-50%] before:skew-x-[325deg] group-hover:before:duration-500 group-hover:before:w-[20px] group-hover:before:left-[20%]
+                        after:absolute after:bottom-0 after:left-[20%] after:w-3 after:h-2 after:bg-[#081b29] after:transform after:translate-x-[-50%] after:skew-x-[325deg] group-hover:after:duration-500 group-hover:after:w-[20px] group-hover:after:left-[80%]'
+                > </i> 
+                <div class="relative flex flex-col">
+                    <label class="text-white absolute top-[-2px] text-[11px] left-1 group-hover:text-[#0ef]" for="">Ár</label>
+                    <label class="text-white absolute top-[-2px] text-[11px] left-20 group-hover:text-[#0ef]" for="">-tól</label>
+                    <label class="text-white absolute top-[-2px] text-[11px] left-[14.5rem] group-hover:text-[#0ef]" for="">-ig</label>
+                    <div class="flex justify-between">
+                        <input class="pt-4 border-none bg-[#081b29] text-[13px] text-white max-w-[115px] text-end" type="number" placeholder="-tól" [(ngModel)]="this.carService.searchFromPrice" (change)="this.carService.searchCar()"/>
+                        <span class="relative top-[14px] left-1 text-white">Ft</span>
+                        <input class="pt-4 border-none bg-[#081b29] text-[13px] text-white max-w-[115px] text-end" type="number" placeholder="-ig" [(ngModel)]="this.carService.searchToPrice" (change)="this.carService.searchCar()"/>
+                        <span class="relative top-[14px] left-1 text-white">Ft</span>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <!--Search btn-->
+    <div class="w-full flex justify-center">
+        <button [class]="this.authService.btn" (click)="this.carService.searchFixation()">Keresés <small>{{this.carService.searchMatchCars.length}}db találat</small></button>
+    </div>
+    <!--advertising-->
+    <p class="text-[#b1adad] text-[12px] text-center mt-8">Hirdetés</p>
+    <div class="w-[85%] mx-auto mb-10 h-[500px] relative overflow-hidden">
+        
+        <div [ngClass]="this.card1? this.advertisingActiveCard1 : this.advertisingCard1">
+            <h3 class="text-6xl font-thin text-white ms-1 mt-6">Kia sportage</h3>
+            <p class="text-white text-xl mb-10">Keresd a limitált szériás Sportage modelleket a márka kereskedésekben!</p>
+           
+            <p class="text-white text-lg">Induló ár:</p>
+            <p class="text-white text-4xl">9 999 000 Ft</p>
+
+            
+            <div class="w-full max-w-[400px] mt-40">
+                <button [class]="this.authService.btn">
+                    <a href="https://www.kia.com/hu/modellek/sportage-nq5/bemutato/" target="_blank">Felkeresem</a>
+                </button>
+            </div>
+            
+           
+        </div>
+        <div [ngClass]="this.card2? this.advertisingActiveCard2 : this.advertisingCard2">
+            <h3 class="text-6xl font-thin text-white ms-1 mt-6">Kia sportage</h3>
+            <p class="text-white text-xl mb-10">Hihetelen kedvezménnyel foglalhat tesztvezetést</p>
+           
+            <p class="text-white text-lg">Tesztvezetés ár:</p>
+            <p class="text-white text-4xl">******* Ft</p>
+
+            
+            <div class="w-full max-w-[400px] mt-48">
+                <button [class]="this.authService.btn">
+                   Jelentkezem
+                </button>
+            </div>
+            
+           
+        </div>
+
+        <div [ngClass]="this.card3? this.advertisingActiveCard3 : this.advertisingCard3">
+            <h3 class="text-6xl font-thin text-white ms-1 mt-6">Kia sportage</h3>
+            <p class="text-white text-xl mb-10">Most rendelje meg új sportage városicrossover-ét és ajándékba rengeteg extrát kap.</p>
+           
+            <p class="text-white text-lg">Adja le rendelését 2024 január. 10-ig az ajándék:</p>
+            <p class="text-white text-4xl">KIA világítós szelepsapkáért.</p>
+
+            
+            <div class="w-full max-w-[400px] mt-40">
+                <button [class]="this.authService.btn">
+                   Rendelés leadás.
+                </button>
+            </div>
+            
+           
+        </div>
+    </div>
+    <!--Car ad browsing-->
+    <div *ngIf="!this.carService.iSeeSearchResult" class="w-[85%] h-[579px] my-10 mx-auto overflow-x-hidden flex flex-wrap justify-center">
+            <div *ngFor="let c of this.carService.allCars" (click)="this.carService.selectCar(c._id)" class="w-[200px] h-[280px] m-1 cursor-pointer hover:border-2 border-white">
+                <div class="w-full h-[170px]">
+                    <img class="w-full object-cover h-[170px]" [src]="c.photos[0].path" alt="car1">
+                </div>
+                <div class="bg-[linear-gradient(45deg,_#081b29,_#0ef)] h-[106px]">
+                    <h3 class="text-lg font-thin">{{c.brand}} {{c.model}} {{c.cylinderCapacity}} cm3</h3>
+                    <h4 class="text-xl font-bold">{{c.price}} Ft</h4>
+                </div>
+            </div>
+    </div>
+
+    <!--Search items-->
+    <div class="w-[85%] mx-auto flex items-center justify-around">
+        <p class="text-[#b1adad] text-lg text-center" *ngIf="this.carService.iSeeSearchResult">Keresési találat:</p>
+        <button *ngIf="this.carService.iSeeSearchResult" (click)="this.carService.iSeeSearchResult = false" class="text-white hover:text-red-500 duration-300"><mat-icon>cancel</mat-icon></button>
+    </div>
+    
+    <div *ngIf="this.carService.iSeeSearchResult" class="w-[85%] h-[579px] my-10 mx-auto overflow-x-hidden flex flex-wrap justify-center">
+        <div *ngFor="let c of this.carService.searchMatchCars" (click)="this.carService.selectCar(c._id)" class="w-[200px] h-[280px] m-1 cursor-pointer hover:border-2 border-white">
+            <div class="w-full h-[170px]">
+                <img class="w-full object-cover h-[170px]" [src]="c.photos[0].path" alt="car1">
+            </div>
+            <div class="bg-[linear-gradient(45deg,_#081b29,_#0ef)] h-[106px]">
+                <h3 class="text-lg font-thin">{{c.brand}} {{c.model}} {{c.cylinderCapacity}} cm3</h3>
+                <h4 class="text-xl font-bold">{{c.price}} Ft</h4>
+            </div>
+        </div>
+</div>
+</div>
+

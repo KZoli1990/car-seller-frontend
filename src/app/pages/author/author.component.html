@@ -1,0 +1,44 @@
+<div class="w-full">
+    <h2 class="my-4 text-center text-[#0ef] text-6xl font-light tracking-wider">Szerző</h2>
+    <!--Profile image-->
+    <div  class="object-cover relative w-[12rem] h-[12rem] third-break:w-[20rem] third-break:h-[20rem] mx-auto rounded-full flex justify-center items-center">
+        <img class="w-[90%] rounded-full border-[3px] border-[#0ef]" src="../../../assets/profile.png" alt="author">
+        <span class='absolute transform rotate-0 border-[3px] border-t-[#0ef] border-b-[#0ef] border-l-[#081b29] border-r-[#081b29] w-full h-full rounded-full animate-spin'></span>
+    </div>
+    <!-- Social icons-->
+    <div class="flex fixed flex-col top-[30%] left-0">
+        <ul>
+            <li class="w-[160px] h-[60px] flex justify-between items-center ml-[-105px] hover:ml-0 duration-500">
+                <a class="flex justify-between items-center w-full text-[#081b29] p-4 bg-[linear-gradient(45deg,_#081b29,_#0ef)]" href="/#">
+                    Facebook
+                    <mat-icon class="scale-150">facebook</mat-icon>
+                </a>
+            </li>
+
+            <li class="w-[160px] h-[60px] flex justify-between items-center ml-[-105px] hover:ml-0 duration-500">
+                <a class="flex justify-between items-center w-full text-[#081b29] p-4 bg-[linear-gradient(45deg,_#081b29,_#0ef)]" href="/#">
+                    Linkedin
+                    <img class="h-[30px]" src="../../../assets/svg/linkedin.svg" alt="linkedin">
+                </a>
+            </li>
+
+            <li class="w-[160px] h-[60px] flex justify-between items-center ml-[-105px] mt-1 hover:ml-0 duration-500">
+                <a class="flex justify-between items-center w-full text-[#081b29] p-4 bg-[linear-gradient(45deg,_#081b29,_#0ef)]" href="/#">
+                    Github
+                    <img class="h-[30px]" src="../../../assets/svg/github.svg" alt="github">
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <h3 class="text-2xl text-center text-[#0ef] my-1">Ez a project MEAN stack és tailwindCss-el készült</h3>
+        <h4 class="text-xl text-center text-[#0ef]">Készítete: <small>Keresztényi Zoltán</small></h4>
+        <p class="text-sm text-center text-white my-1"><strong class="text-[#081b29] p-1 bg-[linear-gradient(45deg,_#081b29,_#0ef)]">Az oldalról:</strong> 
+            A regisztrációhoz minden adat kitöltése kötelező, profilképnek png / jpeg képet lehet beállítani csak 1 képet. 
+            A profil később már nem módosítható. A képfeltöltést lekorlátoztam maximum 2mb-re, de ezt figyelembe kell venni a 
+            <strong><ins>hirdetés feladásban ahol egyszerre 3képet kell feltölteni ami egyben nem haladhatja meg az 2mb-t, </ins></strong>
+            erre azért volt szükség, mert ingyenes mongoDB-t használok azaz(512mb).
+        </p>
+    </div>
+</div>

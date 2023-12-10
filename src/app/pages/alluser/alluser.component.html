@@ -1,0 +1,52 @@
+<h2 class="my-4 text-center text-[#0ef] text-3xl first-break:text-6xl font-light tracking-wider">Összes felhasználó</h2>
+<div class="grid grid-cols-1 third-break:grid-cols-2 fourth-break:grid-cols-3 fifth-break:grid-cols-4 justify-center">
+    <div class="mx-auto" *ngFor="let p of this.authService.allUser">
+        <button (click)="this.focusUser(this.p.userName)"  class=" relative flex m-3 cursor-pointer p-5 overflow-hidden max-w-[300px]">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <div class="flex">
+                <img class="h-16 w-16 object-cover rounded-full" [src]=" p.avatar" alt="avtar">
+                <div class="ms-5">
+                    <h4 class="text-lg font-bold text-white">{{this.p.firstName}} {{this.p.lastName}}</h4>
+                    <p class="text-[#0ef]">{{this.p.email}}</p>
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
+
+<div [ngClass]="this.focusUserOpen? this.activeCard: this.inActiveCard">
+    <div class="absolute top-2 right-2">
+        <button (click)="this.focusCancel()" class="text-white hover:text-red-500 duration-300"><mat-icon>cancel</mat-icon></button>
+    </div>
+    <div class="mt-7 flex flex-col items-center justify-center text-center">
+        <h3 class="text-3xl text-white mb-4">{{this.choiseUser.firstName}} {{this.choiseUser.lastName}}</h3>
+        <img class="h-40 w-40 object-cover rounded-full" [src]=" this.choiseUser.avatar" alt="avtar">
+        <p class="text-lg font-medium text-[#081b29] mt-2">Csatlakozott az oldalhoz: <br> <small class="text-white font-thin">{{this.datePipe.transform(this.choiseUser.createdAt,"yyyy.MM.dd")}}</small></p>
+        <p class="text-lg font-medium text-[#081b29] mt-2 mb-5">Ennyi aktív hirdetése van: <small class="text-white font-thin">{{this.otherUsersAds.length}}</small> </p>
+        <button (click)="this.focusUserCarsOpen = true" class="text-blue-500 font-thin hover:underline mb-5">Ide kattintva megnézheted az összes hidetését</button>
+        <button [class]="this.sendBtn"><a href="mailto:{{this.choiseUser.email}}">Üzenet küldés</a></button> 
+    </div>
+</div>
+
+<div [ngClass]="this.focusUserCarsOpen? this.activeCard: this.inActiveCard">
+    <div class="absolute top-2 right-2">
+        <button (click)="this.focusUserCarsOpen = false" class="text-white hover:text-red-500 duration-300"><mat-icon>cancel</mat-icon></button>
+    </div>
+
+    <h3 class="text-2xl text-white mt-2">Ezek <strong class="text-[#0ef]">{{this.choiseUser.firstName}}</strong> hirdetései.</h3>
+    <p *ngIf="this.otherUsersAds.length === 0"><strong class="text-[#0ef]">{{this.choiseUser.firstName}}</strong> -nak nincs aktív hirdetése.</p>
+    <div *ngIf="this.otherUsersAds.length > 0" class="mx-auto w-[270px] h-[450px] overflow-y-scroll">
+        <div *ngFor="let c of this.otherUsersAds" (click)="this.carService.selectCar(c._id)" class="w-[200px] h-[280px] m-1 cursor-pointer hover:border-2 border-white">
+            <div class="w-full h-[170px]">
+                <img class="w-full object-cover h-[170px]" [src]=" c.photos[0].path" alt="car1">
+            </div>
+            <div class="bg-[linear-gradient(45deg,_#081b29,_#0ef)] h-[106px]">
+                <h3 class="text-lg font-thin">{{c.brand}} {{c.model}} {{c.cylinderCapacity}} cm3</h3>
+                <h4 class="text-xl font-bold">{{c.price}} Ft</h4>
+            </div>
+        </div>
+    </div>
+</div>

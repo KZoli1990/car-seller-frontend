@@ -1,0 +1,8 @@
+<div *ngIf="this.authService.loading || this.carService.loading" class="w-full h-screen  bg-black/50 fixed top-0 flex items-center justify-center z-[100]">
+    <div class='relative flex items-center justify-center h-[300px] w-[300px] bg-[#011015] rounded-full'>
+        <div class='absolute h-[200px] w-[200px] border-0 border-[#011015] border-b-8 border-b-[rgb(255,0,255)] rounded-full animate-loadingRotate1'></div>
+        <div class='absolute h-[200px] w-[200px] border-0 border-[#011015] border-r-8 border-r-[rgb(0,247,255)] rounded-full animate-loadingRotate2'></div>
+        <div class='absolute h-[200px] w-[200px] border-0 border-[#011015] border-t-8 border-t-[rgb(0,255,13)] rounded-full animate-loadingRotate3'></div>
+        <span class='text-white'>Loading...</span>
+    </div>
+</div>

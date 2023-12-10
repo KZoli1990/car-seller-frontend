@@ -1,0 +1,165 @@
+<div [ngClass]="!this.authService.isSignUp ? 'z-[-1]':'z-0'" class="w-full first-break:z-0 py-0 px-[10px] first-break:w-[50%] first-break:pe-[10px] first-break:ps-[5px] second-break:pe-[40px] second-break:ps-[60px] absolute top-0  h-full flex flex-col justify-center right-0 pointer-events-auto">
+    <h2 id="anim1" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterFormAnimateH2: this.activeRegisterFormAnimateH2">Felhasználó Létrehozása</h2>
+    <div>
+        
+        <div id="anim2" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterInputBoxAnimate: this.activeRegisterInputBoxAnimate">
+            <input 
+                autocomplete="off" 
+                type="text" 
+                class="w-full h-full peer bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6 border-white focus:border-[#0ef] valid:border-[#0ef] duration-500" 
+                [(ngModel)]="this.authService.profile.userName" 
+                required
+            >
+            <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none duration-500">Felhasználó Név</label>
+            <mat-icon class="absolute top-1/2 right-0 translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">person</mat-icon>
+        </div>
+        <div id="anim3" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterInputBoxAnimate: this.activeRegisterInputBoxAnimate">
+            <input 
+                autocomplete="off" 
+                type="email" 
+                class="w-full h-full peer bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6 border-white focus:border-[#0ef] valid:border-[#0ef] duration-500" 
+                [(ngModel)]="this.authService.profile.email" 
+                required
+            >
+            <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none duration-500">Email cím</label>
+            <mat-icon class="absolute top-1/2 right-0 translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">email</mat-icon>
+        </div>
+        <div id="anim4" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterInputBoxAnimate: this.activeRegisterInputBoxAnimate">
+            <input 
+                autocomplete="off" 
+                type="password" 
+                class="w-full h-full peer bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6 border-white focus:border-[#0ef] valid:border-[#0ef] duration-500"
+                [(ngModel)]="this.authService.profile.password" 
+                required
+            >
+            <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none duration-500">Jelszó</label>
+            <mat-icon class="absolute top-1/2 right-0 translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">lock</mat-icon>
+        </div>
+        
+        <button 
+            id="anim5"
+            [ngClass]="!this.authService.isSignUp ? this.simpleRegisterBtnAnimate: this.activeRegisterBtnAnimate"
+            (click)="this.authService.register()"
+        >Regisztráció</button>
+        <div id="anim6" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterChoiseAnimate: this.activeRegisterChoiseAnimate">
+            <button
+            (click)="this.miniMobil(true)"
+            class="first-break:hidden relative w-full h-[45px] bg-transparent border-2 border-[#0ef] outline-none rounded-[40px] 
+            cursor-pointer text-[16px] text-white font-[600] z-[1] overflow-hidden before:absolute before:top-[-100%] before:left-0 before:w-full before:h-[300%] before:bg-[linear-gradient(#081b29,_#0ef,_#081b29,_#0ef)] 
+            before:z-[-1] before:duration-500 hover:before:top-0">Teljes profil kitöltése </button>
+            <p *ngIf="this.authService.authError" class="fixed top-[-550%] bg-slate-100 z-[10] first-break:inline first-break:z-0 text-[16px] first-break:relative first-break:left-[-170px] font-bold first-break:text-[12px] third-break:left-[-50px] text-red-500 first-break:whitespace-nowrap">{{this.authService.authError}}</p>
+            <p>Már van fiókod? 
+            <button 
+                (click)="this.authService.authChoise(false)"
+                class="text-[#0ef] font-[600] hover:underline"
+            >Jelentkezz be.</button></p>
+        </div>
+    </div> 
+</div>
+
+<div class="hidden absolute top-0 w-1/2 h-full first-break:flex flex-col justify-center left-0 text-left pe-[150px] pb-[60px] ps-[40px] pointer-events-none">
+    <h2 id="anim7" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterProfilBoxAnimateH2: this.activeRegisterProfilBoxAnimateH2">Profil</h2>
+
+    <div id="anim8" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterProfilBoxAnimate: this.activeRegisterProfilBoxAnimate">
+        <div>
+            <div id="anim2" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterProfileInputBoxAnimate: this.activeRegisterProfileInputBoxAnimate">
+                <input 
+                    autocomplete="off" 
+                    type="text" 
+                    class="w-[100px] peer second-break:w-[222px] h-full bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6 border-white focus:border-[#0ef] valid:border-[#0ef] duration-500" 
+                    [(ngModel)]="this.authService.profile.firstName" 
+                    required
+                >
+                <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none whitespace-nowrap duration-500">Kereszt Név</label>
+                <mat-icon class="absolute top-1/2 left-[-30px] translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">person</mat-icon>
+            </div>
+            <div id="anim3" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterProfileInputBoxAnimate: this.activeRegisterProfileInputBoxAnimate">
+                <input 
+                    autocomplete="off" 
+                    type="text" 
+                    class="w-[80px] peer second-break:w-[175px] h-full bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6  border-white focus:border-[#0ef] valid:border-[#0ef] duration-500" 
+                    [(ngModel)]="this.authService.profile.lastName" 
+                    required
+                >
+                <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none whitespace-nowrap duration-500">Vezeték Név</label>
+                <mat-icon class="absolute top-1/2 left-[-30px] translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">person</mat-icon>
+            </div>
+            <div id="anim4" [ngClass]="!this.authService.isSignUp ? this.simpleRegisterProfileInputBoxAnimate: this.activeRegisterProfileInputBoxAnimate">
+                <label for="avatar"  class="inline-block peer w-[60px] second-break:w-[130px] h-full bg-transparent outline-none border-b-2 text-[16px] text-[#0ef] font-[500] pe-7 border-white hover:underline cursor-pointer duration-500">Profilkép</label>
+                <input 
+                    type="file" 
+                    class="hidden w-[60px]"
+                    id="avatar" 
+                    name="avatar" 
+                    accept="image/*" 
+                    (change)="this.authService.onFileSelected($event)"
+                    required
+                >
+                <div class="w-[60px] second-break:w-[130px] absolute top-[30px] overflow-hidden">
+                    <p class="text-white  text-[10px]  whitespace-nowrap">{{this.authService.choiseAvatarName}}</p>
+                </div>
+                <mat-icon class="absolute top-1/2 left-[-30px] translate-y-[-50%] text-[18px] text-white peer-hover:text-[#0ef] duration-500">face</mat-icon>
+            </div>    
+        </div>
+    </div>
+</div>
+
+<div 
+[ngClass]="this.miniMobilFullProfile ? 'w-full h-full flex justify-center items-center fixed top-0 left-0 z-10 first-break:hidden': 'hidden'"
+>
+    <div class="w-[250px] h-[450px] bg-[linear-gradient(45deg,_#081b29,_#0ef)]">
+            <div class="text-center">
+                <h2 class="text-[44px] text-white leading-snug uppercase font-bold">Profil</h2>
+            </div>
+        
+
+        
+            <div class="w-[80%] mx-auto">
+                <div class="relative w-full h-[50px] my-[25px]">
+                    <input 
+                        autocomplete="off" 
+                        type="text" 
+                        class="w-full peer h-full bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6 border-white focus:border-[#0ef] valid:border-[#0ef] duration-500" 
+                        [(ngModel)]="this.authService.profile.firstName" 
+                        required
+                    >
+                    <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none whitespace-nowrap duration-500">Kereszt Név</label>
+                    <mat-icon class="absolute top-1/2 right-0 translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">person</mat-icon>
+                </div>
+
+                <div class="relative w-full h-[50px] my-[25px]">
+                    <input 
+                        autocomplete="off" 
+                        type="text" 
+                        class="w-full peer h-full bg-transparent outline-none border-b-2 text-[16px] text-white font-[500] pe-6 border-white focus:border-[#0ef] valid:border-[#0ef] duration-500" 
+                        [(ngModel)]="this.authService.profile.lastName" 
+                        required
+                    >
+                    <label class="absolute top-[50%] peer-focus:top-[-5px] peer-focus:text-[#0ef] peer-valid:top-[-5px] peer-valid:text-[#0ef] left-0 translate-y-[-50%] text-[16px] text-white pointer-events-none whitespace-nowrap duration-500">Vezeték Név</label>
+                    <mat-icon class="absolute top-1/2 right-0 translate-y-[-50%] text-[18px] text-white peer-focus:text-[#0ef] peer-valid:text-[#0ef] duration-500">person</mat-icon>
+                </div>
+                
+                <div class="relative w-full h-[50px] my-[25px]">
+                    <label for="upload"  class="inline-block peer w-full h-full bg-transparent outline-none border-b-2 text-[16px] text-[#0ef] font-[500] pe-7 border-white hover:underline cursor-pointer duration-500">Profilkép</label>
+                    <input 
+                        id="upload"
+                        type="file" 
+                        class="hidden w-[60px]"
+                        [(ngModel)]="this.authService.profile.avatar" 
+                        required
+                    >
+                    <mat-icon class="absolute top-1/2 right-0 translate-y-[-50%] text-[18px] text-white peer-hover:text-[#0ef] duration-500">face</mat-icon>
+                </div>    
+                <button 
+                (click)="this.miniMobil(false)"
+            class="relative w-full h-[45px] bg-transparent border-2 border-[#0ef] outline-none rounded-[40px] 
+            cursor-pointer text-[16px] text-white font-[600] z-[1] overflow-hidden
+            before:absolute before:top-[-100%] before:left-0 before:w-full before:h-[300%] before:bg-[linear-gradient(#081b29,_#0ef,_#081b29,_#0ef)] 
+            before:z-[-1] before:duration-500 hover:before:top-0"
+            >Rögzítés</button>
+            </div>
+   
+    </div>
+</div>
+
+

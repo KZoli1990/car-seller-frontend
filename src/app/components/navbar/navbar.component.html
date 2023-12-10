@@ -1,0 +1,90 @@
+<div class="pt-[50px]">
+   
+    <div *ngIf="this.authService.isLoggedIn()" class="mx-auto w-[330px] h-[70px] bg-white flex justify-center items-center rounded-[10px]">
+        <ul class="flex w-[350px]">
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/browser">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'home' ? this.activeIcon : this.icon">
+                        <mat-icon>home</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'home' ? this.activeText : this.text">Kezdőlap</span>
+                </a>
+            </li> 
+
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/profile">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'profile' ? this.activeIcon : this.icon">
+                        <mat-icon>person</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'profile' ? this.activeText : this.text">Profil</span>
+                </a>
+            </li> 
+            
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/addCar">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'addItem' ? this.activeIcon : this.icon">
+                        <mat-icon>add_circle_outline</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'addItem' ? this.activeText : this.text">Hirdetés feladás</span>
+                </a>
+            </li> 
+
+           
+
+            <li [class]="this.listLi">
+                <button [class]="this.btn" (click)="this.logOut()">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'logOut' ? this.activeIcon : this.icon">
+                        <mat-icon>logout</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'logOut' ? this.activeText : this.text">Kijelentkezés</span>
+                </button>
+            </li>
+            
+            <div [class]="this.authService.navBarIndicatorPosition"></div>
+        </ul>
+    </div>
+
+    <div *ngIf="!this.authService.isLoggedIn()" class="mx-auto w-[330px] h-[70px] bg-white flex justify-center items-center rounded-[10px]">
+        <ul class="flex w-[350px]">
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/browser">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'home' ? this.activeIcon : this.icon">
+                        <mat-icon>home</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'home' ? this.activeText : this.text">Kezdőlap</span>
+                </a>
+            </li> 
+
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/author">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'author' ? this.activeIcon : this.icon">
+                        <mat-icon>face</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'author' ? this.activeText : this.text">Szerző</span>
+                </a>
+            </li> 
+            
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/users">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'users' ? this.activeIcon : this.icon">
+                        <mat-icon>people</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'users' ? this.activeText : this.text">Felhasználók</span>
+                </a>
+            </li> 
+
+           
+
+            <li [class]="this.listLi">
+                <a [class]="this.btn" routerLink="/log-reg">
+                    <span [class]="this.icon" [ngClass]="this.authService.navbarLinkActive === 'logIn' ? this.activeIcon : this.icon">
+                        <mat-icon>login</mat-icon>
+                    </span>
+                    <span [class]="this.text" [ngClass]="this.authService.navbarLinkActive === 'logIn' ? this.activeText : this.text">Bejelentkezés</span>
+                </a>
+            </li>
+            
+            <div [class]="this.authService.navBarIndicatorPosition"></div>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+<div *ngIf="!this.foundCar._id" class="w-full h-screen px-3 text-center flex flex-col justify-center items-center">
+    <h2 class="text-2xl text-red-600">Nincs ilyen azonosítóval ellátott hirdetés! 404 Page not found...</h2>
+</div>
+<div *ngIf="this.foundCar._id && !this.iSeeFullImg" class="my-10 flex flex-col items-center">
+    <div>
+        <h2 class="mx-2  w-[150px] p-2 text-white text-xl border-t-2 border-l-2 border-r-2 border-[#0ef]">Jármű adatlap</h2>
+        <span class="absolute ms-[9.5px] top-[205px] h-[3px] w-[146.9px] bg-[#081b29] z-30"></span>
+        <div class="w-[270px] first-break:w-[350px] mx-2 border-t-2 border-l-2 border-r-2 border-[#0ef]">
+            <h3 class="text-xl p-2 text-[#0ef]">{{this.foundCar.brand}} {{this.foundCar.model}} {{this.foundCar.cylinderCapacity}} {{this.foundCar.fuel}}</h3>
+            <div (click)="this.iSeeFullImg = true" class="cursor-pointer group relative">
+                <img class="w-full object-cover h-[170px]" [src]=" actualCarImgPath" [alt]="actualCarImgPath">
+                <div class="absolute top-0 h-[170px] w-full bg-black bg-opacity-30 flex justify-center items-center opacity-100 group-hover:opacity-0 duration-500">
+                    <p class="bg-white p-1 bg-opacity-70">Teljes méretű kép mutatása</p>
+                </div>
+            </div>    
+            <div class="overflow-x-scroll">
+                <div class="inline-flex  pt-1">
+                    <div *ngFor="let p of  this.foundCar.photos" class="w-[150px] inline cursor-pointer">
+                        <img class="w-[140px] object-cover h-[100px] m-1" (click)="this.selectImg(p.path)" [src]=" p.path" [alt]="p.path">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-[270px] first-break:w-[350px] mx-2 border-l-2 border-b-2 border-r-2 border-[#0ef]">
+            <div class="p-2">
+                <p class=" text-white text-xl underline">Ár, költségek</p>
+                <p class=" text-white" >Vételár: <strong class="ms-10 inline-block"> {{this.foundCar.price}} Ft</strong></p>
+                <p class=" text-white" >Vételár EUR: <strong class="max-w-[77px] ms-5 inline-block overflow-hidden">€{{this.foundCar.price / 380}}</strong></p>
+            </div>
+            <hr>
+            <div class="mt-4 p-2">
+                <h2 class="text-white text-xl underline">Műszaki adatok</h2>
+                <p class=" text-white">Márka: <strong class="ms-2"> {{this.foundCar.brand}}</strong></p>
+                <p class=" text-white">Évjárat: <strong class="ms-2"> {{this.foundCar.vintage}}</strong></p>
+                <p class=" text-white">Model: <strong class="ms-2"> {{this.foundCar.model}}</strong></p>
+                <p class=" text-white">Kivitel: <strong class="ms-2"> {{this.foundCar.design}}</strong></p>
+                <p class=" text-white">Üzemanyag: <strong class="ms-2"> {{this.foundCar.fuel}}</strong></p>
+                <p class=" text-white">Hengerűrtartalom: <strong class="ms-2"> {{this.foundCar.cylinderCapacity}} cm3</strong></p>
+                <p class=" text-white">Állapot: <strong class="ms-2"> {{this.foundCar.status}}</strong></p>
+                <p class=" text-white">Forgalmi: <strong class="ms-2"> {{this.foundCar.validityOfTrafficCard}}</strong></p>
+                <p class=" text-white">Hirdetés feladása: <strong class="ms-2"> {{this.datePipe.transform(this.foundCar.carCreatedAt,"yyyy.MM.dd")}}</strong></p>
+            </div>
+            <hr>
+            <div class="mt-4 p-2">
+                <h2 class="text-white text-xl underline">Leírás</h2>
+                <p class="text-white text-sm">{{this.foundCar.text}}</p>
+            </div>
+            <hr>
+            <div class="mt-4 p-2">
+                <h2 class="text-white text-xl underline">Eladó adatai</h2>
+                <div class="text-white flex justify-start items-center mt-2">
+                    <mat-icon>home</mat-icon>
+                    <p class="ms-3"> <strong>{{this.foundCar.country}}</strong> </p>
+                </div>
+                <div class="text-white flex justify-start items-center mt-2">
+                    <mat-icon>phone</mat-icon>
+                    <p class="ms-3"> <strong>{{this.foundCar.phone}}</strong> </p>
+                </div>
+                <div class="text-white flex justify-start items-center mt-2">
+                    <mat-icon>email</mat-icon>
+                    <p class="ms-3"> <strong>{{this.foundCar.owner.email}}</strong> </p>
+                </div>
+                <div class="mt-2 flex justify-center">
+                    <img class="h-16 w-16 object-cover rounded-full" [src]="this.foundCar.owner.avatar" alt="avtar">
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<hr>
+
+<!--Full image-->
+<div [ngClass]="this.iSeeFullImg? this.openFullImgViewStyle: this.closeFullImgViewStyle" *ngIf="this.foundCar._id">
+    
+    <div class="flex justify-around">
+        <h3 class="text-xl text-center my-5 text-[#0ef]">{{this.foundCar.brand}} {{this.foundCar.model}} {{this.foundCar.cylinderCapacity}} {{this.foundCar.fuel}}</h3>
+        <button (click)="this.iSeeFullImg = false" class="text-white hover:text-red-500 duration-300"><mat-icon>cancel</mat-icon></button>
+    </div>
+    
+    <div class="relative">
+        <img class="w-full object-cover h-full" [src]=" this.foundCar.photos[this.imgCount].path" alt="car">
+        
+        <button 
+            *ngIf="this.foundCar.photos.length-1 !== this.imgCount" 
+            (click)="this.incrementImgCount()" 
+            class="absolute top-[50%] right-0 z-10 bg-opacity-40 bg-black p-3 cursor-pointer text-white"
+        ><mat-icon>skip_next</mat-icon></button>
+        
+        
+        <button 
+            *ngIf="this.imgCount > 0" 
+            (click)="this.decrementImgCount()" 
+            class="absolute top-[50%] left-0 text-white z-10 bg-opacity-40 bg-black p-3 cursor-pointer"
+        ><mat-icon>skip_previous</mat-icon></button>
+        
+        <div class="absolute top-0 left-[calc(50%-36px)] bg-opacity-40 bg-black p-5 flex justify-center items-center">
+            <p class="text-white">{{this.imgCount +1}} / {{this.foundCar.photos.length}}</p>
+        </div>
+    </div>     
+    <hr>
+</div>
