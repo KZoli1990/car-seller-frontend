@@ -219,3 +219,14 @@
 </div>
 </div>
 
+<div class="w-full border-t-2 border-black bg-gray-400 px-[10%] pb-5">
+    <h4 class="text-xl text-[#081b29] my-2">Top márkák</h4>
+    <div class="flex flex-wrap">
+        <div *ngFor="let c of this.carService.carList">
+            <span class="text-[#0ef] p-1 border-2 border-[#0ef] rounded-md m-1 block">{{c.brand}}</span>
+        </div>
+    </div>
+   
+    
+</div>
+

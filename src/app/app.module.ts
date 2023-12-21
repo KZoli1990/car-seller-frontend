@@ -17,6 +17,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AddItemComponent } from './pages/add-item/add-item.component';
 import {DatePipe} from '@angular/common';
 import { CustomerViewComponent } from './pages/browse/customer-view/customer-view.component';
+import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CustomerViewComponent } from './pages/browse/customer-view/customer-vie
     AlluserComponent,
     ProfileComponent,
     AddItemComponent,
-    CustomerViewComponent
+    CustomerViewComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,

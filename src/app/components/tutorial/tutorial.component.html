@@ -1,0 +1,151 @@
+<div *ngIf="this.demoAppear" class="w-full h-screen fixed top-0 flex justify-center items-center z-[200] bg-black/50">
+    <div class="w-[90%] second-break:w-[80%] h-[500px] border-2 border-[#0ef] rounded-xl bg-[#081b29] text-[#0ef] p-5 overflow-y-auto">
+        <div class="flex flex-col first-break:flex-row items-center justify-between">
+            <h2 *ngIf="!this.lang" class="text-3xl">Gyors bemutató</h2>
+            <h2 *ngIf="this.lang" class="text-3xl">Quick demo</h2>
+            <label for="lang">
+                <input 
+                    class="hidden"
+                    type="checkbox" 
+                    name="lang" 
+                    id="lang" 
+                    [checked]="this.lang"
+                    (change)="this.lang = !this.lang"
+                >
+                <div 
+                    class="w-[120px] h-[62px] relative border-2 border-[#0ef] rounded-full p-1 cursor-pointer"
+                >
+                    <div class="w-[50px] h-[50px] absolute top-[5px]">
+                        <img class="rounded-full" src="../../../assets/hun.png" alt="hun">
+                    </div>
+                    <div class="w-[50px] h-[50px] absolute top-[5px] left-[62.5px]">
+                        <img class="rounded-full" src="../../../assets/en.png" alt="en">
+                    </div>
+                    <div
+                        [ngClass]="this.lang? 'w-[50px] h-[50px] absolute top-[5px] border-2 border-[#0ef] bg-[linear-gradient(45deg,_#081b29,_#0ef)] rounded-full duration-500':'w-[50px] h-[50px] border-2 border-[#0ef] bg-[linear-gradient(45deg,_#081b29,_#0ef)] rounded-full translate-x-[58px] duration-500'"
+                    >
+                    </div>
+                </div>
+            </label>
+        </div>
+        <div *ngIf="!this.lang">
+            <h3 class="text-2xl underline mb-4">Ezen az oldalon használtautó hirdetéseket lehet feladni.</h3>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">1.</span> Így készült:</p>
+            <div class="ms-4">
+                <p>A project MEAN-stack-el készült</p>
+                <p>A teljes oldal magyar nyelven íródott, de természetesen megtudom oldani nyelvválasztósra, ahogy ebben a demókomponensben van.</p>
+                <p>Az oldal nagyon sokáig tölt mivel a back-end rész "dashboard.render.com"-on lett ingyenesen deployolva, és a front-end pedig vercel-el.</p>
+            </div>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">2.</span>Back-end:</p>
+            <div class="ms-4">
+                <p>Mongodb-t adatbázis kezelőt használtam, express.js-t node.js-en keresztül, a bejelentkezéshez és regiszrációhoz használtam a "JWT" az egyedi azonosító miatt, és
+                    a jelszó biztonsághoz a bcryptjst.
+                </p>
+                <p>A kép feltöltéshez használnom kellett "multer" middleware-t, ami "Cloudinary"-oldalra tölti fel az összes képet, lekorlátoztam maximum 
+                    2mb-ra, és png jpg/jpeg típus lehetséges, a profilképnél csak 1kép lehetséges, viszont a hirdetés feladásnál maximum 3kép.
+                </p>
+            </div>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">3.</span>Front-end:</p>
+            <div class="ms-4">
+                <p>Az oldal betöltödésekor a kezdőlapon ha a h1-es címsor mellett nem jelenik meg profilkép, akkor 
+                    az azt jeleneti hogy nincs bejelentkezve felhasználó.
+                </p>
+                <p>Az alatta lévő inputmezők kitöltésével lehet keresni használtautók között. A keresési gomb azért ír alapból értéket, mert az 
+                    évjárat inputmezője alapértelmezett értékre van állítva 1900-tól az éppen "aktuális év-ig", tehát az összes aktuális hirdetést jelenti.
+                     Az "aktuális év-ig" alatt azt értem, hogy úgy állítottambe, hogy minden év elején frissítsen a "new Date()"-t methodusnak köszönhetően.
+                </p>
+                <p>Volt egy észrevétel, hogy kissé fura a találati lista, mivel a hirdetés alácsúszik, én szándékosan tettem bele, hogy így csökkentsek a 
+                    kezdőlap hosszán. De ha tényleg nagyon zavaró természetesen át tudom írni.
+                </p>
+                <p>A találati listán szereplő hirdetésekre rákattintva elnavigál minket a teljes hirdetéshez, minden hirdetés egyedi URL címmel van ellátva.</p>
+                <p>A hirdetés képeinél lehet léptetni a 3 képet, rákattintva megjelenítődik teljes méretűben amit szintén lehet léptetni. 
+                    Az X-gomb megnyomásával vissza dob a hirdetés adataihoz.</p>
+                <p>A navigációs sávon a kezdőlap fülre kattintva fog vissza dobni a kezdőoldalra.</p>
+                <p>Az összes felhasználó aki regisztrált az oldalra össze van gyűjtve, a felhasználók menüpontban.</p>
+                <p>Rákattintva beadja az adatait pl.: mikor regisztrált az oldalra mennyi aktív hirdetése van és lehet nekik üzenetetküldeni 
+                    (persze aki nem kamu emailcímmel jelentkezett be).
+                    És meglehet nézni az összes hirdetését az aktuális személynek.
+                    Ami szintén ugyan úgy kattintható és ugyan úgy elnavigál a teljes hirdetéshez. 
+                </p>
+            </div>
+
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">4.</span>Bejelentkezés:</p>
+            <div class="ms-4 mb-5">
+                <p class="text-red-500"><strong>A regisztrált profilt módosítani, törölni nem lehet!</strong></p>
+                <p>A registrációt úgy oldottam meg, hogy 1 emailcímmel egyszer lehet regisztálni. Nem tettem emailcím ellenőrzést tehát 
+                    <strong><ins>KAMU EMAILCIMMEL</ins></strong>-is lehet regisztrálni. Természetesen megtudom oldani hogy egyedi jelszavat küldjön ki email-címre,
+                    így meggátólni a kamu felhasználókat, de ezt az oldalt csak egy referencia munkának szántam.
+                </p>
+                <p>A regisztrációnál kikötésnek tettembe az összes input mező kitöltését és az 1 képfeltöltést png/jpg/jpeg típust.</p>
+                <p>A sikeres regisztráció után, átnavigál a bejelentkezés lehetőségre, ami automatikusan kitöltésre kerül és csak a bejelentkezés fülre 
+                    kell kattintani.
+                </p>
+                <p>A sikeres bejelentkezést követően automatikusan a kezdőlapra kerülünk ahol megjelenik a nevünk és a profilképünk az oldalon és megváltozik a
+                    navigációs mező is.
+                </p>
+                <p>A profil menüben megtalálom a teljes profil adataimat, az összes hirdetésemet amire eltudok navigálni, törölni, módosítani tudom. A hirdetés feladása
+                    gombra kattintva átdob a hirdetés feladás szekcióba. <strong class="text-red-500">1 felhasználónak maximum 5 hirdetés lehetséges!</strong>
+                </p>
+            </div>
+            <p>Nagyvonalakban ennyit tudtam elmondani az oldalról, köszönöm hogy ellátogattál ide, és el olvastad ezt a leírást.</p>
+            <p>Remélem tetszeni fog az oldal, ha valami hibát találsz kérlek küld el üzenetben, a navigációs mező "szerző" szekcióban megtalálod az elérhetőségeimet,
+                előre is köszönök minden észrevételt.
+            </p>
+        </div>
+
+        <div *ngIf="this.lang">
+            <h3 class="text-2xl underline mb-4">You can place used car advertisements on this page.</h3>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">1.</span> How it was made:</p>
+            <div class="ms-4">
+                <p>The project was built with MEAN stack.</p>
+                <p>The entire page is written in Hungarian, but I can easily make it language-selectable, as demonstrated in this demo component.</p>
+                <p>The page takes a long time to load because the back-end is deployed for free on "dashboard.render.com," and the front-end is deployed with Vercel.</p>
+            </div>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">2.</span>Back-end:</p>
+            <div class="ms-4">
+                <p>I used MongoDB as a database handler, Express.js with Node.js, and "JWT" for login and registration for unique identification. For password security, I used bcrypt.js.</p>
+                <p>I had to use the "multer" middleware for image upload, which uploads all images to the "Cloudinary" site. I limited it to a maximum of 2MB, and allowed only PNG and JPG/JPEG types. For profile pictures, only one image is allowed, while for posting ads, a maximum of 3 images is allowed.</p>
+            </div>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">3.</span>Front-end:</p>
+            <div class="ms-4">
+                <p>When the page loads, if there is no profile picture next to the h1 heading on the homepage, it means that no user is logged in.</p>
+                <p>You can search for used cars by filling out the input fields below. The search button is pre-filled because the model year input field is set to the default value from "1900 to the current year," meaning all current ads.</p>
+                <p>By "current year," I mean that I set it up to refresh the "new Date()" method every year, thanks to the method.</p>
+                <p>There was a comment that the search results list looks a bit strange because the ad slides underneath. I intentionally added this to reduce the length of the homepage. But if it's really annoying, I can, of course, rewrite it.</p>
+                <p>Clicking on the ads in the search results list will navigate us to the full ad, each ad has a unique URL.</p>
+                <p>You can navigate through the 3 images of the ad, clicking on them will display them in full size, which can also be navigated. Pressing the X button will return to the ad details.</p>
+                <p>In the navigation bar, clicking on the homepage tab will take you back to the homepage.</p>
+                <p>All registered users are gathered in the user menu.</p>
+                <p>Clicking on it provides their data, such as when they registered on the site, how many active ads they have, and you can send them a message (of course, for those who did not register with a fake email address). You can also view all their ads, which can be clicked on and navigated to the full ad.</p>
+            </div>
+            <p class="text-1xl underline"><span class="px-1 border-2 border-[#0ef] rounded-full">4.</span>Login:</p>
+            <div class="ms-4 mb-5">
+                <p class="text-red-500"><strong>You cannot modify or delete the registered profile!</strong></p>
+                <p>I handled registration so that you can register only once with one email address. I did not perform email address verification, so you can register with a <strong><ins>FAKE EMAIL ADDRESS</ins></strong>. Of course, I can handle sending a unique password to the email address to prevent fake users, but I intended this page only as a reference work.</p>
+                <p>For registration, I made it a requirement to fill out all input fields and upload 1 image in PNG/JPG/JPEG format.</p>
+                <p>After successful registration, it navigates to the login option, which is automatically filled out and only needs to be clicked on the login tab.</p>
+                <p>After successful login, you are automatically directed to the homepage, where your name and profile picture appear on the page, and the navigation field changes.</p>
+                <p>In the profile menu, I can find all my profile data, all my ads that I can navigate, delete, and modify. Clicking on the "Post Ad" button will take you to the ad posting section. <strong class="text-red-500">A maximum of 5 ads is allowed for 1 user!</strong></p>
+            </div>
+            <p>In broad strokes, that's what I could tell you about the site. Thank you for visiting here and reading this description.</p>
+            <p>I hope you like the site. If you find any errors, please send them in a message. You can find my contact information in the "author" section of the navigation field. Thank you in advance for any feedback.</p>
+        </div>
+        
+        <div class="flex justify-center items-center text-white mx-auto mt-6">
+            <label *ngIf="!this.lang" class="cursor-pointer" for="termination">Ne jelenjen meg többet.</label>
+            <label *ngIf="this.lang" class="cursor-pointer" for="termination">Don't show up again.</label>
+            <input 
+                type="checkbox" 
+                id="termination" 
+                class="w-5 h-5 cursor-pointer ms-1"
+                [checked]="this.demoDelete"
+                (change)="this.demoDelete = !this.demoDelete"
+            >
+        </div>
+        <div class="w-[200px] mx-auto ps-10">
+            <button *ngIf="!this.lang" [class]="this.authService.btn" (click)="this.demoTerminate()">Kilépés</button>
+            <button *ngIf="this.lang" [class]="this.authService.btn" (click)="this.demoTerminate()">Exit</button>
+        </div>
+        
+    </div>
+</div>
